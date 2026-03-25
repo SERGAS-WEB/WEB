@@ -92,6 +92,105 @@
         <p><strong>Visión:</strong> Consolidarnos como un socio estratégico para la industria nacional, que aporte directamente en el alza de los índices de productividad de cada uno de nuestros clientes.</p>
     </section>
 
+
+    <!-- INICIO SECCIÓN GALERÍA CARRUSEL -->
+<section id="galeria" style="padding: 60px 20px; background-color: #f8f9fa; text-align: center;">
+    <h2 style="color: #1a5f7a; margin-bottom: 10px;">Nuestros Proyectos en Imágenes</h2>
+    <p style="margin-bottom: 30px; color: #666;">Desliza para ver nuestras instalaciones y equipos</p>
+
+    <!-- Contenedor Principal del Carrusel -->
+    <div class="carousel-container" style="position: relative; max-width: 900px; margin: 0 auto; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        
+        <!-- Lista de Imágenes -->
+        <div class="carousel-track" id="track" style="display: flex; transition: transform 0.5s ease-in-out; width: 100%;">
+            
+            <!-- IMAGEN 1: Reemplaza 'src' con la ruta de tu foto -->
+            <div class="slide" style="min-width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; background-color: #ddd;">
+                <!-- Ejemplo: <img src="proyecto1.jpg" alt="Montaje Mecánico" style="width: 100%; height: 100%; object-fit: cover;"> -->
+                <span style="color: #555; font-size: 1.2em;">Foto Proyecto 1 (Montaje)</span>
+            </div>
+
+            <!-- IMAGEN 2 -->
+            <div class="slide" style="min-width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; background-color: #ccc;">
+                <!-- <img src="caldera.jpg" alt="Caldera" style="width: 100%; height: 100%; object-fit: cover;"> -->
+                <span style="color: #555; font-size: 1.2em;">Foto Proyecto 2 (Calderas)</span>
+            </div>
+
+            <!-- IMAGEN 3 -->
+            <div class="slide" style="min-width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; background-color: #bbb;">
+                <!-- <img src="piping.jpg" alt="Piping" style="width: 100%; height: 100%; object-fit: cover;"> -->
+                <span style="color: #555; font-size: 1.2em;">Foto Proyecto 3 (Piping)</span>
+            </div>
+
+        </div>
+
+        <!-- Botones de Navegación (Flechas) -->
+        <button onclick="moveSlide(-1)" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 15px; cursor: pointer; border-radius: 50%; font-size: 18px; z-index: 10;">❮</button>
+        <button onclick="moveSlide(1)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 15px; cursor: pointer; border-radius: 50%; font-size: 18px; z-index: 10;">❯</button>
+
+        <!-- Indicadores (Puntos abajo) -->
+        <div style="position: absolute; bottom: 15px; left: 0; right: 0; display: flex; justify-content: center; gap: 10px; z-index: 10;">
+            <span class="dot" onclick="currentSlide(0)" style="height: 12px; width: 12px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+            <span class="dot" onclick="currentSlide(1)" style="height: 12px; width: 12px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+            <span class="dot" onclick="currentSlide(2)" style="height: 12px; width: 12px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Lógica del Carrusel
+    let slideIndex = 0;
+    const track = document.getElementById('track');
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = slides.length;
+    let autoPlayInterval;
+
+    // Función para mover las flechas
+    function moveSlide(n) {
+        slideIndex += n;
+        if (slideIndex >= totalSlides) slideIndex = 0;
+        if (slideIndex < 0) slideIndex = totalSlides - 1;
+        updateCarousel();
+    }
+
+    // Función para los puntos indicadores
+    function currentSlide(n) {
+        slideIndex = n;
+        updateCarousel();
+    }
+
+    // Actualizar la posición del carrusel
+    function updateCarousel() {
+        // Mover el track
+        track.style.transform = `translateX(-${slideIndex * 100}%)`;
+        
+        // Actualizar puntos activos
+        dots.forEach(dot => dot.style.backgroundColor = '#bbb');
+        dots[slideIndex].style.backgroundColor = '#159895'; // Color activo (verde azulado SERGAS)
+    }
+
+    // Auto-play (opcional: cambia cada 4 segundos)
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            moveSlide(1);
+        }, 4000);
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+
+    // Iniciar
+    startAutoPlay();
+
+    // Pausar cuando el usuario pasa el mouse por encima (mejora UX)
+    const container = document.querySelector('.carousel-container');
+    container.addEventListener('mouseenter', stopAutoPlay);
+    container.addEventListener('mouseleave', startAutoPlay);
+</script>
+<!-- FIN SECCIÓN GALERÍA CARRUSEL -->
+
     <section class="contact" id="contacto">
         <h2>Contáctanos</h2>
         <p style="margin: 20px 0;">Ruta D-43, Sector Las Barrancas, Coquimbo</p>
